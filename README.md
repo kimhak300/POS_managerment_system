@@ -34,3 +34,48 @@ Before you begin, ensure you have met the following requirements:
 - [Python](https://www.python.org/downloads/) installed on your local machine.
 - [Flask](https://flask.palletsprojects.com/en/2.1.x/) framework installed. You can install it using pip:
 
+
+### Installation
+ Open your cmd and type make install
+
+## Usage
+
+### Configuration
+
+Before running the application, you may need to configure certain settings:
+
+- Configure data sources and categories in the application.
+- Customize the web interface to match your branding.
+
+### Running the Application
+
+To run the application, follow these steps:
+
+1. Make sure your virtual environment is activated.
+
+2. Start the Flask development server:
+
+
+3. Access the application in your web browser at `http://localhost:5000`.
+
+## Contributing
+
+Contributions are welcome! If you'd like to contribute to this project, please follow these guidelines:
+
+- Fork the repository.
+- Create a new branch for your feature or bug fix.
+- Make your changes and commit them.
+- Push your changes to your fork and create a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Flask](https://flask.palletsprojects.com/en/2.1.x/) - The web framework used.
+- [Bootstrap](https://getbootstrap.com/) - Used for styling the interface.
+- [FontAwesome](https://fontawesome.com/) - Used for icons.
+
+
+
