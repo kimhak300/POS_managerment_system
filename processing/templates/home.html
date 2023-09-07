@@ -17,7 +17,6 @@
         <select name="category-domestic" id="domesticCategory"></select>
         <button type="submit" name="download_button_domestic" id="domestic-button">Download</button>
         <div id="download-status" style="display: none;"></div>
-            {{ response_html }}
         <!-- Placeholder for status message -->
       </div>
     </form>
@@ -26,7 +25,6 @@
     <h2>International Data</h2>
     <form action="{{ url_for('process_form') }}" method="POST">
     <div>
-      <label for="internationalWebsite">Select Website:</label>
       <label for="internationalWebsite">Select Website:</label>
       <select id="internationalWebsite" name="international-website">
         <option value="website1">The Organization of the Petroleum Exporting Countries (OPEC)</option>

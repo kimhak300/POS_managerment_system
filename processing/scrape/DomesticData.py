@@ -10,7 +10,7 @@ class GDP:
         self.path = path
         self.choice = choice
 
-    def scrap_GDP(path: str, link: str):
+    def scrap_GDP(self, path: str, link: str):
 
         response = requests.get(link)
         soup = BeautifulSoup(response.content, "html.parser")

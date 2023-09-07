@@ -125,7 +125,8 @@ class Scraper:
         date_input = driver.find_element(By.ID,
                                          "ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_txtTanggal")
         date_input.send_keys(target_date)
-        date_input.send_keys(Keys.ENTER)
+        button = driver.find_element(By.ID, "ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_btnSearch2")
+
 
         ################################## Setting Up Currencies
         # Find and interact with the currency dropdown
@@ -134,7 +135,8 @@ class Scraper:
                 (By.ID, "ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_ddlmatauang1"))
         )
         currency_dropdown.send_keys(target_currency)
-        currency_dropdown.send_keys(Keys.ENTER)
+        # currency_dropdown.send_keys(Keys.ENTER)
+        button.click()
 
         ################################## Start: Waiting ##################################
         waiting()
@@ -152,17 +154,17 @@ class Scraper:
             # Find all <tr>, <td> & <th> elements within the <tbody> using XPath
             table_row_elements = driver.find_element(
                 By.XPATH,
-                f"/html/body/form/div[12]/div/div[3]/div[2]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[{tr}]")
+                f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]')
 
             if tr == 1:
                 th_elements_1 = table_row_elements.find_element(By.XPATH,
-                                                                f'/html/body/form/div[12]/div/div[3]/div[2]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[1]/th[1]')
+                                                                f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[1]/th[1]')
                 th_elements_2 = table_row_elements.find_element(By.XPATH,
-                                                                f'/html/body/form/div[12]/div/div[3]/div[2]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[1]/th[2]')
+                                                                f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[1]/th[2]')
                 th_elements_3 = table_row_elements.find_element(By.XPATH,
-                                                                f'/html/body/form/div[12]/div/div[3]/div[2]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[1]/th[3]')
+                                                                f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[1]/th[3]')
                 th_elements_4 = table_row_elements.find_element(By.XPATH,
-                                                                f'/html/body/form/div[12]/div/div[3]/div[2]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[1]/th[4]')
+                                                                f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[1]/th[4]]')
                 columns.append(th_elements_1.text)
                 columns.append(th_elements_2.text)
                 columns.append(th_elements_3.text)
@@ -170,26 +172,28 @@ class Scraper:
             if tr > 1:
                 td_elements_1 = table_row_elements.find_element(
                     By.XPATH,
-                    f'/html/body/form/div[12]/div/div[3]/div[2]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[{tr}]/td[1]')
+                    f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[{tr}]/td[1]'
+
+                )
                 td_elements_2 = table_row_elements.find_element(
                     By.XPATH,
-                    f'/html/body/form/div[12]/div/div[3]/div[2]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[{tr}]/td[2]')
+                    f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[{tr}]/td[2]')
                 td_elements_3 = table_row_elements.find_element(
                     By.XPATH,
-                    f'/html/body/form/div[12]/div/div[3]/div[2]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[{tr}]/td[3]')
+                    f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[{tr}]/td[3]')
                 td_elements_4 = table_row_elements.find_element(
                     By.XPATH,
-                    f'/html/body/form/div[12]/div/div[3]/div[2]/div[4]/div/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/table/tbody/tr[{tr}]/td[4]')
+                    f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[{tr}]/td[4]')
 
                 currency_type.append(td_elements_1.text)
                 value.append(td_elements_2.text)
                 sell.append(td_elements_3.text.replace(',', ''))
                 buy.append(td_elements_4.text.replace(',', ''))
                 date.append(date_value)
-        ################################## End of Pulling Data ##################################
+            ################################## End of Pulling Data ##################################
 
-        ################################### Start: DataFrame and Save DataFrame ###################################
-        # DataFrame
+            ################################### Start: DataFrame and Save DataFrame ###################################
+            # DataFrame
         df = pd.DataFrame(data={"Date": date,
                                 "Currencies": currency_type,
                                 "Value": value,
@@ -287,6 +291,8 @@ class Scraper:
 
         # return value for further use
         return to_xlsx
+
+
 
 #
 # internationaux = international("/Users/mac/Desktop/MoLVT/demo/", 2023, 8, 23)
