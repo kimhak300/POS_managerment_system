@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% block title %} Ministry of Data Collection {% endblock %} {% block content %}
+{% extends 'base.html' %}
+{% block title %} Ministry of Data Collection {% endblock %}
+{% block content %}
+ <div id="download-status" style="display: none;"></div>
 <main xmlns="http://www.w3.org/1999/html">
   <div class="block">
     <h2>Domestic Data</h2>
@@ -16,7 +19,6 @@
         <input name="location" type="text" placeholder="Directory for datas" required>
         <select name="category-domestic" id="domesticCategory"></select>
         <button type="submit" name="download_button_domestic" id="domestic-button">Download</button>
-        <div id="download-status" style="display: none;"></div>
         <!-- Placeholder for status message -->
       </div>
     </form>
@@ -29,6 +31,7 @@
       <select id="internationalWebsite" name="international-website">
         <option value="website1">The Organization of the Petroleum Exporting Countries (OPEC)</option>
         <option value="website2">Bank Indonesia - Indonesia Exchange Rate</option>
+        <option value="website3">Thailand-Daily Foreign Exchange Rates</option>
       </select>
     </div>
     <div class="website">
@@ -42,14 +45,32 @@
       </div>
       <input type="text" placeholder="Directory for datas" name="path-international" required>
       <!-- Categories will be dynamically populated based on the selected website -->
-      </select>
       <button type="submit" name="download_button_international">Download</button>
     </div>
     </form>
   </div>
-
 </main>
 <nav class="secondary-navigation">
   <p>Copyright © by 2012 - 2023 Ministry of Labour and Vocational Training.</p>
 </nav>
-<script src="assets/js/dynamic_button.js"></script> {% endblock %}
+<script src="assets/js/dynamic_button.js"></script>
+<script>
+  // JavaScript code to display the alert message
+  {% if response %}
+    var responseData = {{ response | tojson | safe }};
+    if (responseData.status === 'success') {
+      // Display a success alert
+      displayAlert('success', responseData.message);
+    } else if (responseData.status === 'error') {
+      // Display an error alert
+      displayAlert('error', responseData.message); // Use 'danger' for error messages
+    }
+  {% endif %}
+
+  function displayAlert(type, message) {
+    var alertDiv = document.getElementById('download-status');
+    alertDiv.innerHTML = '<div class="alert alert-' + type + '">' + message + '</div>';
+    alertDiv.style.display = 'block';
+  }
+</script>
+{% endblock %}

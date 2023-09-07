@@ -57,48 +57,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-        // const downloadButton = document.getElementById('domestic-button');
-        // const downloadStatus = document.getElementById('download-status');
-        //
-        // downloadButton.addEventListener('click', async (event) => {
-        //   downloadStatus.textContent = 'Downloading...';
-        //   downloadStatus.style.color = 'blue';
-        //   downloadStatus.style.display = 'block';
-        //   event.preventDefault()
-        //    try {
-        //     const response = await fetch('/process_form', {
-        //       method: 'POST',
-        //       headers: {
-        //         'Content-Type': 'application/json'
-        //       },
-        //     });
-        //
-        //     if (!response.ok) {
-        //       throw new Error(`HTTP error! Status: ${response.status}`);
-        //     }
-        //
-        //     const responseData = await response.json(); // Parse the JSON response
-        //
-        //     // Display the response data in an alert
-        //     alert(JSON.stringify(responseData));
-        //
-        //     if (responseData.status === 'success') {
-        //       downloadStatus.textContent = responseData.message;
-        //       downloadStatus.style.color = 'green';
-        //     } else if (responseData.status === 'error') {
-        //       downloadStatus.textContent = responseData.message;
-        //       downloadStatus.style.color = 'red';
-        //     }
-        //
-        //   } catch (error) {
-        //     console.error('Error:', error);
-        //     downloadStatus.textContent = 'An error occurred. Please try again later.';
-        //     downloadStatus.style.color = 'red';
-        //   }
-        //
-        //   downloadStatus.style.display = 'block';
-        //
-        // });
+
+
 });
 
 

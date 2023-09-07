@@ -3,3 +3,8 @@ static_folder = r"D:\Intership\Labour ministry of combodain\system\processing\te
 
 # driver test path:
 driver_path = r"D:\Intership\Labour ministry of combodain\chromedriver-win64\chromedriver.exe"
+
+# path of streamlit file (Ex: streamlit_app.py file)
+psf = "D:/Intership/Labour ministry of combodain/system/processing/streamlit_app.py"
+
+

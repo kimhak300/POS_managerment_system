@@ -141,3 +141,23 @@ button:hover {
 .secondary-navigation p{
     color: #ccc;
 }
+
+/* Success alert style */
+.alert-success {
+    background-color: #0c6ee0;
+    color: white;
+}
+
+/* Error alert style */
+.alert-error {
+    background-color: #e50a4b;
+    color: white;
+}
+
+/* Common styles for all alerts */
+.alert {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+

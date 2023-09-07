@@ -3,6 +3,7 @@ import psutil
 from processing import app, streamlit_app
 from flask import request, jsonify
 from processing.scrape import DomesticData, International
+from processing.constant import psf
 from flask import render_template
 import streamlit as st
 import os
@@ -15,8 +16,13 @@ def home_page():
     return render_template("home.html")
 
 
+# Initialize the response variable
+response = {}
+
 @app.route('/process_form', methods=['POST'])
 def process_form():
+    global response
+
     if 'download_button_domestic' in request.form:
         # Retrieve user input
         path = request.form.get('location')
@@ -35,8 +41,6 @@ def process_form():
             except Exception as e:
                 response = {'status': 'error', 'message': f'Error: {str(e)}'}
 
-        return render_template('data.html', response= jsonify(response) ) # Return JSON response
-
     if "download_button_international" in request.form:
         # Retrieve user input
         location = request.form.get('path-international')
@@ -51,17 +55,22 @@ def process_form():
                 response = {'status': 'success', 'message': 'Data download successful!'}
             except Exception as e:
                 response = {'status': 'error', 'message': f'Error: {str(e)}'}
-        else:
+        elif website == 'website2':
             scrapping.ExchangeRateIndonesia()
             try:
                 response = {'status': 'success', 'message': 'Data download successful!'}
             except Exception as e:
                 response = {'status': 'error', 'message': f'Error: {str(e)}'}
-
-        return jsonify(response)  # Return JSON response
+        elif website == 'website3':
+            scrapping.thailand_exchange_rate()
+            try:
+                response = {'status': 'success', 'message': 'Data download successful!'}
+            except Exception as e:
+                response = {'status': 'error', 'message': f'Error: {str(e)}'}
 
     # Handle other form submissions or render the page as needed
-    return render_template('home.html')
+    return render_template('home.html', response=response)
+
 
 # Define the Streamlit process globally
 streamlit_process = None
@@ -72,7 +81,7 @@ def streamlit_page():
     # Check if a Streamlit process is already running
     if streamlit_process is None or not psutil.pid_exists(streamlit_process.pid):
         # Streamlit is not running, so start a new process
-        streamlit_command = ["streamlit", "run", "D:/Intership/Labour ministry of combodain/system/processing/streamlit_app.py", "--server.headless", "true"]
+        streamlit_command = ["streamlit", "run", psf, "--server.headless", "true"]
 
         try:
             streamlit_process = subprocess.Popen(streamlit_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)

@@ -13,6 +13,7 @@ import requests
 import wget
 import pandas as pd
 import os
+from processing.scrape.Bank_thianland.thailand_exchange_rate import Bank_thailand_scraper
 
 
 class Scraper:
@@ -50,9 +51,9 @@ class Scraper:
                 response = wget.download(url=a_link['href'], out=filename)
                 print(' ........... Successfully downloaded!')
 
-        data = pd.read_xml(self.path + 'basketDayArchives.xml')
-        csv_file = data.to_csv(self.path + 'OPEC_Basket_Price.csv')
-        xlsx_file = data.to_excel(self.path + 'OPEC_Basket_Price.xlsx')
+        data = pd.read_xml(self.path+ '\\' + 'basketDayArchives.xml')
+        csv_file = data.to_csv(self.path +'\\'+ 'OPEC_Basket_Price.csv')
+        xlsx_file = data.to_excel(self.path + '\\'+'OPEC_Basket_Price.xlsx')
 
         return csv_file, xlsx_file
 
@@ -164,7 +165,7 @@ class Scraper:
                 th_elements_3 = table_row_elements.find_element(By.XPATH,
                                                                 f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[1]/th[3]')
                 th_elements_4 = table_row_elements.find_element(By.XPATH,
-                                                                f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[1]/th[4]]')
+                                                                f'//*[@id="ctl00_PlaceHolderMain_g_6c89d4ad_107f_437d_bd54_8fda17b556bf_ctl00_gvSearchResult2"]/tbody/tr[2]/td[4]')
                 columns.append(th_elements_1.text)
                 columns.append(th_elements_2.text)
                 columns.append(th_elements_3.text)
@@ -210,11 +211,13 @@ class Scraper:
         """
         os.makedirs(self.path, exist_ok=True)
         filename = f"Exchange_Rate_Indonesia_{date_value}.xlsx"
-        to_xlsx = df.to_excel(self.path + filename, index=False)
+
+        # Specify the path for the files
+        xlsx_file_path = self.path + '\\' + filename
+
+        to_xlsx = df.to_excel(xlsx_file_path, index=False)
 
         # Check files if they are existed!
-        # Specify the path for the files
-        xlsx_file_path = self.path + filename
 
         # Check if the CSV and XLSX files exist
         if os.path.exists(xlsx_file_path):
@@ -292,11 +295,18 @@ class Scraper:
         # return value for further use
         return to_xlsx
 
+    def thailand_exchange_rate(self):
+        path = self.path
+        scraping = Bank_thailand_scraper(path)
+        scraping.land_first_page()
+        scraping.get_csv()
 
 
+
+# #
+# internationaux = Scraper("D:\Intership\Labour ministry of combodain\demo", None, None, None)
 #
-# internationaux = international("/Users/mac/Desktop/MoLVT/demo/", 2023, 8, 23)
 # # Function for OPEC
-# internationaux.opec_org()
-# # Function for Exchange Rate Indonesia
-# internationaux.ExchangeRateIndonesia()
+# internationaux.thailand_exchange_rate()
+# # # Function for Exchange Rate Indonesia
+# # internationaux.ExchangeRateIndonesia()
