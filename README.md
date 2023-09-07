@@ -7,6 +7,7 @@
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+  - [Using the `make` Command](#using-the-make-command)  <-- Added section
 - [Usage](#usage)
   - [Configuration](#configuration)
   - [Running the Application](#running-the-application)
@@ -34,9 +35,54 @@ Before you begin, ensure you have met the following requirements:
 - [Python](https://www.python.org/downloads/) installed on your local machine.
 - [Flask](https://flask.palletsprojects.com/en/2.1.x/) framework installed. You can install it using pip:
 
-
 ### Installation
- Open your cmd and type make install
+
+Open your cmd and type:
+
+```bash
+make install
+````
+### Using the `make` Command
+
+To execute various tasks related to your project, you can use the `make` command in the Windows Command Prompt (CMD). Here's how:
+
+1. **Ensure Make is Installed**:
+
+   Before using the `make` command, ensure that it's installed on your system. You can install 'make' using Chocolatey by following the provided instructions in the [Installation](#installation) section.
+
+2. **Open the Command Prompt**:
+
+   Open the Command Prompt by pressing `Win + R`, typing `cmd`, and pressing Enter.
+
+3. **Navigate to Your Project Directory**:
+
+   Use the `cd` command to navigate to your project directory. Replace `YourUsername` and the path to match your project's location:
+
+   ```bash
+   cd C:\Users\YourUsername\YourProjectFolder
+   ```
+
+4. **Run Makefile Commands**:
+
+   Run Makefile commands using the `make` command followed by the specific target or command you want to execute. For example:
+
+   ```bash
+   make install
+   ```
+
+   The available commands and their descriptions are defined in your project's Makefile.
+
+5. **Review Output**:
+
+   As you execute Makefile commands, the Command Prompt will display relevant information, including task execution details and any error messages.
+
+6. **Exit the Command Prompt**:
+
+   To exit the Command Prompt, either close the window or enter:
+
+   ```bash
+   exit
+   ```
 
 ## Usage
 
