@@ -15,6 +15,7 @@ import pandas as pd
 import os
 from processing.scrape.Bank_thianland.thailand_exchange_rate import Bank_thailand_scraper
 from processing.scrape.exp_srilanka import exp_sri_lanka
+from processing.scrape.ADB import scraper
 
 
 class Scraper:
@@ -305,6 +306,11 @@ class Scraper:
     def exp_srilanka(self):
         path = self.path
         exp_sri_lanka(path)
+
+    def adb(self):
+        path = self.path
+        scraper(path)
+
 
 
 

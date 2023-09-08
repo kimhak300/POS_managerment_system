@@ -73,6 +73,12 @@ def process_form():
                 response = {'status': 'success', 'message': 'Data download successful!'}
             except Exception as e:
                 response = {'status': 'error', 'message': f'Error: {str(e)}'}
+        elif website == 'website6':
+            scrapping.adb()
+            try:
+                response = {'status': 'success', 'message': 'Data download successful!'}
+            except Exception as e:
+                response = {'status': 'error', 'message': f'Error: {str(e)}'}
 
     # Handle other form submissions or render the page as needed
     return render_template('home.html', response=response)
