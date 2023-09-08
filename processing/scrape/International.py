@@ -14,6 +14,7 @@ import wget
 import pandas as pd
 import os
 from processing.scrape.Bank_thianland.thailand_exchange_rate import Bank_thailand_scraper
+from processing.scrape.exp_srilanka import exp_sri_lanka
 
 
 class Scraper:
@@ -300,6 +301,12 @@ class Scraper:
         scraping = Bank_thailand_scraper(path)
         scraping.land_first_page()
         scraping.get_csv()
+
+    def exp_srilanka(self):
+        path = self.path
+        exp_sri_lanka(path)
+
+
 
 
 
