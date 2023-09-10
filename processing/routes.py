@@ -1,5 +1,4 @@
 import psutil
-
 from processing import app, streamlit_app
 from flask import request, jsonify
 from processing.scrape import DomesticData, International
@@ -8,6 +7,7 @@ from flask import render_template
 import streamlit as st
 import os
 import subprocess
+from processing.scrape.Banglasdesh_ex_rate import mainb
 
 
 @app.route('/')
@@ -48,7 +48,15 @@ def process_form():
         day = request.form.get('day')
         month = request.form.get('month')
         year = request.form.get('year')
+        start_date = request.form.get('start_date')
+        end_date = request.form.get('end_date')
+        # page_number = int(request.form.get('page_number'))
+        input_date_str = request.form.get('input_date_str')
         scrapping = International.Scraper(path=location, year=year, day=day, month=month)
+        # Create instance of Banglasdesh class
+        scrap_bd = mainb.Banglasdesh(path=location)
+
+
         if website == 'website1':
             try:
                 scrapping.opec_org()
@@ -67,6 +75,26 @@ def process_form():
                 response = {'status': 'success', 'message': 'Data download successful!'}
             except Exception as e:
                 response = {'status': 'error', 'message': f'Error: {str(e)}'}
+        elif website == 'website5':
+            scrapping.china_exchange_rate(path=location, start_date=start_date, end_date=end_date)
+            try:
+                response = {
+                    'status': 'success',
+                    'message': 'Data download successful!'
+                }
+                # total_pages = total_pages  # Include total_pages in the response
+            except Exception as e:
+                response = {'status': 'error', 'message': f'Error: {str(e)}'}
+        if website == 'website6':
+            scrap_bd.mainbd(path=location, input_date_str=input_date_str)
+            try:
+                response = {
+                    'status': 'success',
+                    'message': 'Data download successful!'
+                }
+            except Exception as e:
+                response = {'status': 'error', 'message': f'Error: {str(e)}'}
+
 
     # Handle other form submissions or render the page as needed
     return render_template('home.html', response=response)

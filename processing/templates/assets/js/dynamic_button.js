@@ -3,8 +3,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const internationalWebsiteSelect = document.getElementById("internationalWebsite");
     const additionalInfoDomestic = document.getElementById("additionalInfoDomestic");
     const additionalInfoInternational = document.getElementById("additionalInfoInternational");
-    const internationalCategorySelect = document.getElementById("internationalCategory");
-    const domesticCategorySelect = document.getElementById("domesticCategory");
+    const additionalInfoInternational1 = document.getElementById("additionalInfoInternational1");
+    const additionalInfoInternational2 = document.getElementById("additionalInfoInternational2");
+    const internationalCategory = document.getElementById("internationalCategory");
+    const domesticCategory = document.getElementById("domesticCategory");
 
     // Define category options for different websites
     const websiteCategoryOptions = {
@@ -37,29 +39,37 @@ document.addEventListener("DOMContentLoaded", function() {
             selectElement.appendChild(option);
         });
     }
-    updateCategories(domesticCategorySelect, domesticWebsiteSelect.value);
-
+    updateCategories(domesticCategory, domesticWebsiteSelect.value);
 
     // Event listener for domestic website selection
     domesticWebsiteSelect.addEventListener("change", function() {
-        updateCategories(domesticCategorySelect, this.value);
+        updateCategories(domesticCategory, this.value);
     });
+
     // Call hideAdditionalInfo to set the default state
     hideAdditionalInfo(additionalInfoInternational);
+    hideAdditionalInfo(additionalInfoInternational1);
+    hideAdditionalInfo(additionalInfoInternational2);
 
     // Event listener for international website selection
     internationalWebsiteSelect.addEventListener("change", function() {
         // TODO: Implement event handling for international website selection
         if (this.value === "website2") {
             showAdditionalInfo(additionalInfoInternational);
+            hideAdditionalInfo(additionalInfoInternational1);
+            hideAdditionalInfo(additionalInfoInternational2);
+        } else if (this.value === "website5") {
+            showAdditionalInfo(additionalInfoInternational1);
+            hideAdditionalInfo(additionalInfoInternational);
+            hideAdditionalInfo(additionalInfoInternational2);
+        } else if (this.value === "website6") {
+            showAdditionalInfo(additionalInfoInternational2);
+            hideAdditionalInfo(additionalInfoInternational1);
+            hideAdditionalInfo(additionalInfoInternational);
         } else {
             hideAdditionalInfo(additionalInfoInternational);
+            hideAdditionalInfo(additionalInfoInternational1);
+            hideAdditionalInfo(additionalInfoInternational2);
         }
     });
-
-
-
 });
-
-
-
