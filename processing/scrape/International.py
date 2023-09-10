@@ -17,10 +17,10 @@ from processing.scrape.Bank_thianland.thailand_exchange_rate import Bank_thailan
 from processing.scrape.exp_srilanka import exp_sri_lanka
 from processing.scrape.ADB import scraper
 
-
 class Scraper:
     # Initialize variables
     def __init__(self, path, year, month, day):
+        
         self.path = path
         self.year = year
         self.month = month
@@ -302,6 +302,51 @@ class Scraper:
         scraping = Bank_thailand_scraper(path)
         scraping.land_first_page()
         scraping.get_csv()
+        
+    # def china_exchange_rate(self,path, num_pages, start_date, end_date, driver_path = driver_path):
+        
+        # driver_path = driver_path
+
+        # target_currency = "USD"
+
+        # scraper = ForexScraper(driver_path)
+        # forex_data = scraper.scrape_data(target_currency, start_date, end_date, num_pages)
+        #forex_data.to_csv(f"chinaExchangeRate {start_date} to {end_date}.csv",index=False)
+        #Specify the destination directory
+        # my_csv = f"chinaExchangeRate {start_date} to {end_date}.csv"
+        # destination_dir = path + '\\' + f"{forex_data.to_csv(my_csv,index=False)}"
+
+       # Create the destination directory if it doesn't exist
+        # os.makedirs(destination_dir, exist_ok=True)
+        #print(forex_data)
+    def china_exchange_rate(self, path, start_date, end_date, driver_path=driver_path):
+        # Specify the target currency
+        target_currency = "USD"
+        driver_path = driver_path
+
+        # Initialize the ForexScraper with the provided driver_path
+        scraper = ForexScraper(driver_path)
+
+        # Scrape forex data
+        forex_data = scraper.scrape_data(target_currency, start_date, end_date)
+
+        # Specify the destination directory for the CSV file
+        destination_dir = path  # Use the provided path as the destination directory
+
+        # Create the destination directory if it doesn't exist
+        os.makedirs(destination_dir, exist_ok=True)
+
+        # Define the CSV file name based on start_date and end_date
+        csv_filename = f"chExRate_{start_date}_to_{end_date}.csv"
+
+        # Construct the full path to the CSV file
+        csv_filepath = os.path.join(destination_dir, csv_filename)
+
+        # Save the scraped data to the CSV file
+        forex_data.to_csv(csv_filepath, index=False)
+
+        print(f"Data saved to {csv_filepath}")
+
 
     def exp_srilanka(self):
         path = self.path

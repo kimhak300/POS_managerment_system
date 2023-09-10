@@ -8,3 +8,4 @@ flask~=2.3.3
 setuptools~=68.0.0
 streamlit~=1.26.0
 openpyxl
+psutil~=5.9.5

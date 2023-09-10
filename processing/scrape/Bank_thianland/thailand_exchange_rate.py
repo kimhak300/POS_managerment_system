@@ -4,6 +4,9 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 
 class Bank_thailand_scraper(webdriver.Chrome):
     def __init__(self, path, driver_path=driver_path, teardown=False):
@@ -25,11 +28,17 @@ class Bank_thailand_scraper(webdriver.Chrome):
         self.get(const.BASE_URL)
 
     def get_csv(self):
-        gotit = self.find_element(By.XPATH, '//*[@id="container-55222efc2a"]/div/div[3]/div/div/div/div/table/tbody/tr[3]/td[3]/button/span')
-        gotit.click()
+        try:
+            # Wait for the "Got it" button to be clickable
+            gotit = WebDriverWait(self, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="container-55222efc2a"]/div/div[3]/div/div/div/div/table/tbody/tr[3]/td[3]/button/span')))
+            gotit.click()
 
-        currency_element = self.find_element(By.XPATH, '//*[@id="container-b9454cb2b1"]/div/div[2]/bot-statistics/div[2]/div/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button[2]/i')
-        currency_element.click()
+            # Wait for the currency element to be clickable
+            currency_element = WebDriverWait(self, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="container-b9454cb2b1"]/div/div[2]/bot-statistics/div[2]/div/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/button[2]/i')))
+            currency_element.click()
 
-        download_csv = self.find_element(By.XPATH, '//*[@id="container-b9454cb2b1"]/div/div[2]/bot-statistics/div[2]/div/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div[2]/ul/li[1]/button')
-        download_csv.click()
+            # Wait for the download CSV button to be clickable
+            download_csv = WebDriverWait(self, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="container-b9454cb2b1"]/div/div[2]/bot-statistics/div[2]/div/div/div/div/div/div/div[2]/div/div[2]/div[2]/div/div[2]/ul/li[1]/button')))
+            download_csv.click()
+        except Exception as e:
+            print(f"Error: {e}")
