@@ -81,8 +81,23 @@ def process_form():
                 response = {'status': 'success', 'message': 'Data download successful!'}
             except Exception as e:
                 response = {'status': 'error', 'message': f'Error: {str(e)}'}
+        elif website == 'website5':
+            scrapping.china_exchange_rate(path=location, start_date=start_date, end_date=end_date)
+            try:
+              response = {
+                'status': 'success',
+                'message': 'Data download successful!'
+            }
+            # total_pages = total_pages  # Include total_pages in the response
+            except Exception as e: response = {'status': 'error', 'message': f'Error: {str(e)}'}
         elif website == 'website6':
             scrapping.adb()
+            try:
+                response = {'status': 'success', 'message': 'Data download successful!'}
+            except Exception as e:
+                response = {'status': 'error', 'message': f'Error: {str(e)}'}
+        elif website == 'website7':
+            scrap_bd.mainbd(path=location,input_date_str=input_date_str)
             try:
                 response = {'status': 'success', 'message': 'Data download successful!'}
             except Exception as e:

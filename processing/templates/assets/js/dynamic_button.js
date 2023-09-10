@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function() {
             showAdditionalInfo(additionalInfoInternational1);
             hideAdditionalInfo(additionalInfoInternational);
             hideAdditionalInfo(additionalInfoInternational2);
-        } else if (this.value === "website6") {
+        } else if (this.value === "website7") {
             showAdditionalInfo(additionalInfoInternational2);
             hideAdditionalInfo(additionalInfoInternational1);
             hideAdditionalInfo(additionalInfoInternational);

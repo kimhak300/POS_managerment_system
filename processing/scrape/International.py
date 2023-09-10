@@ -6,6 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from processing.constant import driver_path
 from selenium.webdriver.common.keys import Keys
+from processing.scrape.E_change_Rate_of_China.my_package.scrapers.forex_scraper import ForexScraper
 # import mysql.connector
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -20,7 +21,7 @@ from processing.scrape.ADB import scraper
 class Scraper:
     # Initialize variables
     def __init__(self, path, year, month, day):
-        
+
         self.path = path
         self.year = year
         self.month = month
